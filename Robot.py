@@ -33,4 +33,9 @@ class Robot(object):
             sleep(value/1000)
             self.completedTasks.append(key)
 
+    #def __len__(self):
+    #     return len(self.completedTasks)
+
+    def getCompletedCount(self):
+        return len(self.completedTasks)
 

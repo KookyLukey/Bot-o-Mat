@@ -7,11 +7,14 @@ botTasks = TaskList.tasks
 mainMenuSel = 0
 
 def runMainMenu():
+    print()
     print('Welcome to Bot-o-Mat. Please select one of the following:')
     print('1: Add a robot')
     print('2: Check current robot status')
-    print('3: Exit')
+    print('3: Leaderboard')
+    print('4: Exit')
     mainMenuSel = input('Enter selection: ')
+    print()
 
     if mainMenuSel == '1':
         botName = input('Enter the robot name:')
@@ -26,8 +29,19 @@ def runMainMenu():
     
     elif mainMenuSel == '2':
         for bots in curRobots:
-            print(bots.name)
+            print(bots.name + ': ' + bots.type)
             print(bots.completedTasks)
         runMainMenu()
+    
+    elif mainMenuSel == '3':
+        tempBots = curRobots
+        #print(tempBots[0].getCompletedCount())
+        printList = sorted(tempBots, key=lambda bot: len(bot.completedTasks), reverse=True)
+        
+        for i in printList:
+            print(i.name + " has completed " + str(len(i.completedTasks)) + " tasks.")
+
+        runMainMenu()
+
 
 runMainMenu()
