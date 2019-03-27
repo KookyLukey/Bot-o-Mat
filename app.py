@@ -12,7 +12,8 @@ def runMainMenu():
     print('1: Add a robot')
     print('2: Check current robot status')
     print('3: Leaderboard')
-    print('4: Exit')
+    print('4: Time taken to complete tasks')
+    print('5: Exit')
     mainMenuSel = input('Enter selection: ')
     print()
 
@@ -35,12 +36,19 @@ def runMainMenu():
     
     elif mainMenuSel == '3':
         tempBots = curRobots
-        #print(tempBots[0].getCompletedCount())
-        printList = sorted(tempBots, key=lambda bot: len(bot.completedTasks), reverse=True)
+        tempBots = sorted(tempBots, key=lambda bot: len(bot.completedTasks), reverse=True)
         
-        for i in printList:
+        for i in tempBots:
             print(i.name + " has completed " + str(len(i.completedTasks)) + " tasks.")
 
+        runMainMenu()
+
+    elif mainMenuSel == '4':
+        tempBots = curRobots
+        tempBots = sorted(tempBots, key=lambda bot: sum(bot.completedTime), reverse=True)
+        
+        for i in tempBots:
+            print(i.name + " has taken " + str(sum(i.completedTime)) + " milliseconds to complete its tasks.")
         runMainMenu()
 
 
