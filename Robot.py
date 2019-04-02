@@ -11,6 +11,7 @@ class Robot(object):
         curTasks: A dictionary to store the robots current tasks
         completedTasks: A list to store which tasks the robot has completed
         isRunning: A boolean to check if theinstance is running or not
+        completedTime: A list to store the time it has taken to coplete tasks
     """
 
     def __init__(self, name, type):
@@ -29,14 +30,12 @@ class Robot(object):
         while i < 5:
             tempKey, tempVal = random.choice(list(tempTaskList.items()))
 
-            #Add it to the instances dict and remove it from the temp so we don't get duplicates
+            #Add it to the instances dictionary and make sure the key doesn't already exist before adding
             if tempKey in self.curTasks:
                 pass
             else:
                 self.curTasks[tempKey] = tempVal 
                 i+=1
-            print(self.curTasks)
-        print(self.curTasks)
 
     def startTasks(self):
         for key, value in self.curTasks.items():
