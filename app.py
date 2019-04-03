@@ -28,7 +28,9 @@ def runMainMenu():
         if botType.upper() in botTypeList:
             isCreated = False
             for index, curBot in enumerate(curRobots):
+                #If the name of the bot already exists, add the new tasks to the old instance
                 if curBot.name.upper() == botName.upper():
+                    setattr(curRobots[index], 'type', botType)
                     curRobots[index].curTasks.clear()
                     curRobots[index].assignTasks()
                     curRobots[index].isRunning = True
@@ -46,19 +48,19 @@ def runMainMenu():
             print('That is not a correct type. Please try again.')
 
         runMainMenu()
-    
+
     #If user selects 2 print out the bots name, type, and completed tasks
     elif mainMenuSel == '2':
         for bots in curRobots:
             print(bots.name + ': ' + bots.type)
             print(bots.completedTasks)
         runMainMenu()
-    
+
     #If user selects 3 print out a leaderboard of completed tasks with the highest bot at the top
     elif mainMenuSel == '3':
         tempBots = curRobots
         tempBots = sorted(tempBots, key=lambda bot: len(bot.completedTasks), reverse=True)
-        
+
         for i in tempBots:
             print(i.name + " has completed " + str(len(i.completedTasks)) + " tasks.")
 
@@ -68,7 +70,7 @@ def runMainMenu():
     elif mainMenuSel == '4':
         tempBots = curRobots
         tempBots = sorted(tempBots, key=lambda bot: sum(bot.completedTime), reverse=True)
-        
+
         for i in tempBots:
             print(i.name + " has taken " + str(sum(i.completedTime)) + " milliseconds to complete its tasks.")
         runMainMenu()
